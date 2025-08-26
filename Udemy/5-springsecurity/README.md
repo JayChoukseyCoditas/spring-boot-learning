@@ -12,14 +12,24 @@
 
 **Spring Security Overview**
 graph TD
-A[Web Browser] -->|HTTP Request| B[Spring Security Filters]
-B -->|Authenticate/Authorize| C[Protected Web Resources<br>e.g., /mytopsecretstuff]
-C -->|Response| B
-B -->|HTTP Response| A
-B -->|Validate Credentials| D[App Security Configuration]
-D -->|User, Password, Roles| B
-D -->|Configure| E[User Details Service]
-E -->|Provide User Data| D
+A[Web Browser] -->|Send HTTP Request| B{Is Resource Protected?}
+B -->|No| C[Protected Web Resources<br>e.g., /mytopsecretstuff]
+B -->|Yes| D{Is User Authenticated?}
+D -->|No| E[App Security Configuration]
+E -->|Validate User, Password, Roles| F[User Details Service]
+F -->|Provide User Data| E
+E -->|Authenticate| D
+D -->|Yes| G{Is User Authorized?}
+G -->|Yes| C
+C -->|Generate Response| B
+B -->|Return HTTP Response| A
+G -->|No| H[Access Denied]
+classDef decision fill:#f9f,stroke:#333,stroke-width:2px;
+classDef action fill:#9f9,stroke:#333,stroke-width:2px;
+classDef endNode fill:#f99,stroke:#333,stroke-width:2px;
+class B,D,G decision;
+class A,C,E,F action;
+class H endNode;
 
 **Spring Security in Action**
 ```mermaid
