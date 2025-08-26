@@ -11,6 +11,7 @@
 - Spring provides a bulk of security functionalities with servlet filters
 
 **Spring Security Overview**
+```mermaid
 graph TD
 A[Web Browser] -->|Send HTTP Request| B{Is Resource Protected?}
 B -->|No| C[Protected Web Resources<br>e.g., /mytopsecretstuff]
