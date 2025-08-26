@@ -30,7 +30,7 @@ graph TD
     H -->|No| J[Access Denied]
     classDef decision fill:#f9f,stroke:#333,stroke-width:2px;
     classDef action fill:#9f9,stroke:#333,stroke-width:2px;
-    classDef end fill:#f99,stroke:#333,stroke-width:2px;
+    classDef endNode fill:#f99,stroke:#333,stroke-width:2px;
     class B,D,H decision;
     class A,C,E,F,G,I action;
-    class J end;
+    class J endNode;
