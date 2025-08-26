@@ -11,9 +11,15 @@
 - Spring provides a bulk of security functionalities with servlet filters
 
 **Spring Security Overview**
-- Web Browser -----> Spring Security Filters ------> Protected Web Resources (eg, /mytopsecretstuff)
-- Protected Web Resources ------> Spring Security Filters --------> Web Browser
-- Spring Security Filters ---> my app security configuration <-----> user, password, roles
+graph TD
+A[Web Browser] -->|HTTP Request| B[Spring Security Filters]
+B -->|Authenticate/Authorize| C[Protected Web Resources<br>e.g., /mytopsecretstuff]
+C -->|Response| B
+B -->|HTTP Response| A
+B -->|Validate Credentials| D[App Security Configuration]
+D -->|User, Password, Roles| B
+D -->|Configure| E[User Details Service]
+E -->|Provide User Data| D
 
 **Spring Security in Action**
 ```mermaid
