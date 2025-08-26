@@ -11,27 +11,10 @@
 - Spring provides a bulk of security functionalities with servlet filters
 
 **Spring Security Overview**
-```mermaid
-graph TD
-A[Web Browser] -->|Send HTTP Request| B{Is Resource Protected?}
-B -->|No| C[Protected Web Resources<br>e.g., /mytopsecretstuff]
-B -->|Yes| D{Is User Authenticated?}
-D -->|No| E[App Security Configuration]
-E -->|Validate User, Password, Roles| F[User Details Service]
-F -->|Provide User Data| E
-E -->|Authenticate| D
-D -->|Yes| G{Is User Authorized?}
-G -->|Yes| C
-C -->|Generate Response| B
-B -->|Return HTTP Response| A
-G -->|No| H[Access Denied]
-classDef decision fill:#f9f,stroke:#333,stroke-width:2px;
-classDef action fill:#9f9,stroke:#333,stroke-width:2px;
-classDef endNode fill:#f99,stroke:#333,stroke-width:2px;
-class B,D,G decision;
-class A,C,E,F action;
-class H endNode;
-
+- Web Browser -----> Spring Security Filters ------> Protected Web Resources (eg, /mytopsecretstuff)
+- Protected Web Resources ------> Spring Security Filters --------> Web Browser
+- Spring Security Filters ---> my app security configuration <-----> user, password, roles
+  
 **Spring Security in Action**
 ```mermaid
 graph TD
