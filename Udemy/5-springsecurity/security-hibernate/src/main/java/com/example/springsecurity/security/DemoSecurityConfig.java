@@ -8,11 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
@@ -36,6 +32,8 @@ public class DemoSecurityConfig {
 
         http.authorizeHttpRequests(configurer ->
                 configurer
+                        .requestMatchers(HttpMethod.GET, "/api/csrf-token").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET, "/api/").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.GET, "/api/employees").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, "api/employees").hasRole("MANAGER")
@@ -47,7 +45,7 @@ public class DemoSecurityConfig {
         http.httpBasic(Customizer.withDefaults());
 
         // disable Cross Site Request Forgery (CSRF)
-        http.csrf(csrf -> csrf.disable());
+//        http.csrf(csrf -> csrf.disable());
 
         return http.build();
     }

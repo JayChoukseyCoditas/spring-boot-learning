@@ -26,6 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public Employee findById(int theId) {
         Optional<Employee> result = employeeRepository.findById(theId);
 
+//        result.orElseThrow() -> use this instead
         if(result.isPresent()){
             return result.get();
         }else{
